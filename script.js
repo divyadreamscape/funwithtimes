@@ -3,16 +3,17 @@ let num1, num2, score = 0;
 function showTimesTables() {
     let timesTables = document.getElementById('timesTables');
     for (let i = 1; i <= 10; i++) {
+        let row = document.createElement('tr');
         for (let j = 1; j <= 10; j++) {
-            let p = document.createElement('p');
-            p.textContent = `${i} * ${j} = ${i * j}`;
-            timesTables.appendChild(p);
+            let cell = document.createElement('td');
+            cell.textContent = `${i} * ${j} = ${i * j}`;
+            row.appendChild(cell);
         }
-        let hr = document.createElement('hr');
-        timesTables.appendChild(hr);
+        timesTables.appendChild(row);
     }
     document.getElementById('startQuiz').style.display = 'block';
 }
+
 
 function newQuestion() {
     num1 = Math.floor(Math.random() * 10) + 1;
