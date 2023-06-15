@@ -1,23 +1,16 @@
-let num1, num2, score = 0;
-
-function showTimesTables() {
-    let timesTables = document.getElementById('timesTables');
-    for (let i = 1; i <= 10; i++) {
-        let row = document.createElement('tr');
-        for (let j = 1; j <= 10; j++) {
-            let cell = document.createElement('td');
-            cell.textContent = `${i} * ${j} = ${i * j}`;
-            row.appendChild(cell);
-        }
-        timesTables.appendChild(row);
-    }
-    document.getElementById('startQuiz').style.display = 'block';
-}
-
+let num1, num2 = 6, score = 0;
+let maxScore = 10; // score needed to progress to the next stage
+let maxNum = 10; // final stage
+let motivationalMessages = [
+    "Great start! Keep going!",
+    "You're doing awesome! Next level!",
+    "Fantastic! Next level, you got this!",
+    "Excellent! On to the final level!",
+    "Congratulations! You've mastered the times tables!"
+];
 
 function newQuestion() {
     num1 = Math.floor(Math.random() * 10) + 1;
-    num2 = Math.floor(Math.random() * 10) + 1;
     document.getElementById('question').textContent = `What's ${num1} * ${num2}?`;
 }
 
@@ -31,32 +24,29 @@ async function getRandomPokemon() {
     pokemonImg.style.display = 'block';
 }
 
-document.getElementById('startQuiz').addEventListener('click', function() {
-    document.getElementById('timesTables').style.display = 'none';
-    document.getElementById('startQuiz').style.display = 'none';
-    document.getElementById('question').style.display = 'block';
-    document.getElementById('answer').style.display = 'block';
-    document.getElementById('check').style.display = 'block';
-    newQuestion();
-});
+newQuestion(); // Start the game with a question
 
 document.getElementById('check').addEventListener('click', async function() {
     let answer = document.getElementById('answer').value;
     if (answer == num1 * num2) {
         document.getElementById('result').textContent = 'Correct! Good job! 😊';
-        document.getElementById('result').classList.add('blinking');
         document.getElementById('applause').play();
         score++;
-        await getRandomPokemon();
+        if (score === maxScore && num2 < maxNum) { // Move to the next stage
+            score = 0;
+            num2++;
+            document.getElementById('stage').textContent = motivationalMessages[num2 - 6];
+            await getRandomPokemon();
+        } else if (score === maxScore && num2 === maxNum) { // The user has completed the game
+            document.getElementById('stage').textContent = motivationalMessages[motivationalMessages.length - 1];
+            await getRandomPokemon();
+        }
     } else {
         document.getElementById('result').textContent = 'Oops! That’s not correct. Try again. 😔';
-        document.getElementById('result').classList.remove('blinking');
         document.getElementById('negative').play();
     }
     document.getElementById('score').textContent = `Score: ${score}`;
     document.getElementById('answer').value = '';
     newQuestion();
 });
-
-showTimesTables();
 

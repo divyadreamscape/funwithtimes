@@ -5,18 +5,19 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Times Table Game</h1>
-    <table id="timesTables"></table>
-    <button id="startQuiz" style="display: none;">Start Quiz</button>
-    <p id="question" style="display: none;"></p>
-    <input id="answer" type="number" style="display: none;">
-    <button id="check" style="display: none;">Check Answer</button>
-    <img id="pokemon" style="display: none;">
-    <p id="result"></p>
-    <p id="score">Score: 0</p>
-    <audio id="applause" src="applause.mp3" preload="auto"></audio>
-    <audio id="negative" src="negative.mp3" preload="auto"></audio>
-</body>
+    <div class="center">
+        <h1>Times Table Game</h1>
+        <p id="stage"></p>
+        <p id="question"></p>
+        <input id="answer" type="number">
+        <button id="check">Check Answer</button>
+        <img id="pokemon" style="display: none;">
+        <p id="result"></p>
+        <p id="score">Score: 0</p>
+        <audio id="applause" src="applause.mp3" preload="auto"></audio>
+        <audio id="negative" src="negative.mp3" preload="auto"></audio>
+    </div>
 <script src="script.js"></script>
+</body>
 </html>
 

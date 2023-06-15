@@ -19,4 +19,11 @@ button {
     padding: 5px;
     text-align: center;
 }
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 
